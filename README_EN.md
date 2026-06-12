@@ -1,0 +1,226 @@
+# PaperPhone Plus — Android Client
+
+🌐 **其他语言 / Other Languages:** [中文](README.md)
+
+> This repository is the **Android native client** (Capacitor-wrapped) of [PaperPhone Plus](https://github.com/619dev/Paperphone-plus), built from the upstream frontend codebase for Google Play and sideload distribution.
+
+[![Upstream](https://img.shields.io/badge/Upstream-619dev%2FPaperphone--plus-blue?logo=github)](https://github.com/619dev/Paperphone-plus)
+[![React](https://img.shields.io/badge/React-19-blue)](#)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](#)
+[![Capacitor](https://img.shields.io/badge/Capacitor-8-green)](#)
+[![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](LICENSE)
+
+[![Google Play](https://img.shields.io/badge/Google%20Play-Download-green?logo=google-play)](https://play.google.com/store/apps/details?id=com.fm619.paperphoneplus)
+
+---
+
+## 📖 Overview
+
+PaperPhone Plus is a WeChat-style end-to-end encrypted instant messaging application. This repository contains the Android native client, which uses [Capacitor](https://capacitorjs.com/) to package the React + TypeScript frontend into an Android APK/AAB.
+
+### Key Features
+
+| Feature | Description |
+|---------|-------------|
+| 🔐 End-to-End Encryption | Stateless ECDH + XSalsa20-Poly1305, per-message ephemeral keys, forward secrecy |
+| 🗝️ Zero-Knowledge Server | Server stores only ciphertext; private keys stay on device (4-layer persistence) |
+| 📹 Video/Voice Calls | WebRTC P2P (1:1) + Mesh (group), Cloudflare TURN traversal |
+| 🎙️ Real-time Voice Changer | Voice messages & calls support 3 modes (0.8x / 1.0x / 1.2x) |
+| 👥 Group Chat | Up to 2,000 members, encrypted & unencrypted modes |
+| 💬 Rich Messaging | Text, images, video, files, voice messages, emoji panel, Telegram sticker packs, read receipts |
+| 🌐 Moments | Post updates (text + images/video), likes, comments, tag-based visibility |
+| 📰 Timeline | Xiaohongshu-style public feed with waterfall layout, anonymous posting |
+| 🔔 Push Notifications | FCM + OneSignal + ntfy multi-channel push |
+| 🌐 Multi-language | Chinese, English, Japanese, Korean, French, German, Russian, Spanish |
+| 🔑 Two-Factor Auth | Google Authenticator-compatible TOTP with 8 recovery codes |
+| 📷 QR Code Scanning | Scan to add friends or join groups |
+
+---
+
+## 🏗️ Architecture
+
+```
+ppp-android/
+├── android/                  # Capacitor Android native project
+├── src/                      # React + TypeScript frontend source
+│   ├── App.tsx               # Router + auth guard
+│   ├── index.css             # Design system (dark/light, glassmorphism)
+│   ├── main.tsx              # React entry point
+│   ├── api/                  # HTTP client + WebSocket client
+│   ├── components/           # UI components (TabBar, call overlay, QR code, etc.)
+│   ├── contexts/             # React contexts
+│   ├── crypto/               # Encryption modules
+│   │   ├── ratchet.ts        # ECDH + XSalsa20-Poly1305 encryption
+│   │   ├── keystore.ts       # 4-layer private key persistence
+│   │   └── groupCrypto.ts    # Group encryption (Sender Key protocol)
+│   ├── hooks/                # Custom hooks
+│   ├── i18n/                 # Internationalization
+│   ├── pages/                # Page components
+│   ├── store/                # Zustand state management
+│   └── utils/                # Utility functions
+├── capacitor.config.ts       # Capacitor configuration
+├── vite.config.ts            # Vite build configuration
+├── package.json              # Dependency management
+└── google-services.json      # Firebase config (FCM push)
+```
+
+### Tech Stack
+
+- **Frontend Framework**: React 19 + TypeScript 5.7
+- **Build Tool**: Vite 6
+- **State Management**: Zustand 5
+- **Native Bridge**: Capacitor 8 (Android)
+- **Crypto Library**: libsodium-wrappers-sumo (WebAssembly, Curve25519 / XSalsa20-Poly1305)
+- **Post-Quantum Crypto**: crystals-kyber-js (CRYSTALS-Kyber key encapsulation)
+- **Video Calls**: WebRTC API
+- **Push Notifications**: Firebase Cloud Messaging (FCM)
+- **UI Icons**: Lucide React
+- **Animations**: Lottie Web
+- **QR Code**: qrcode + jsqr
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) ≥ 18
+- [Android Studio](https://developer.android.com/studio) + Android SDK
+- JDK 17+
+
+### Installation & Build
+
+```bash
+# 1. Clone the repository
+git clone <repo-url> && cd ppp-android
+
+# 2. Install dependencies
+npm install
+
+# 3. Build the frontend
+npm run build
+
+# 4. Sync to Android project
+npx cap sync android
+
+# 5. Open in Android Studio
+npx cap open android
+```
+
+### Development Mode
+
+```bash
+# Start the frontend dev server
+npm run dev
+
+# In another terminal, run Android with live reload
+npx cap run android --livereload --external
+```
+
+> **Note**: In development mode, you need to configure the backend server address. You can manually enter the backend URL on the login page, e.g., `https://your-server.com`.
+
+---
+
+## 🔧 Configuration
+
+### Capacitor Configuration
+
+Core settings are in [capacitor.config.ts](capacitor.config.ts):
+
+| Setting | Value | Description |
+|---------|-------|-------------|
+| `appId` | `com.fm619.paperphoneplus` | Android application package name |
+| `appName` | `PaperPhone` | App display name |
+| `webDir` | `dist` | Frontend build output directory |
+| `androidScheme` | `https` | Required for WebRTC and crypto APIs |
+
+### Firebase Push Configuration
+
+1. Create a project in [Firebase Console](https://console.firebase.google.com) and add an Android app
+2. Download `google-services.json` and place it in the project root
+3. Configure FCM credentials on the backend server (see [upstream docs](https://github.com/619dev/Paperphone-plus#配置-fcmcapacitor-原生-android-app))
+
+---
+
+## 📦 Building for Release
+
+### Build Release APK/AAB
+
+```bash
+# Build the frontend
+npm run build
+
+# Sync to Android project
+npx cap sync android
+
+# In Android Studio, build a signed bundle
+# Build → Generate Signed Bundle / APK
+```
+
+### Signing Configuration
+
+The project includes a release signing keystore `paperphone-release.keystore` for Google Play signed distribution.
+
+---
+
+## 🔗 Related Projects
+
+| Project | Description |
+|---------|-------------|
+| [Paperphone-plus](https://github.com/619dev/Paperphone-plus) | Upstream main repository (frontend + backend) |
+| [ppp-win](https://github.com/619dev/ppp-win) | Windows desktop client |
+| [ppp-mac](https://github.com/619dev/ppp-mac) | Mac desktop client |
+
+---
+
+## 🔒 Security Model
+
+```
+On Registration:
+  Device locally generates IK (Identity Key) + SPK (Signed Pre-Key) + 20x OPK (One-time Pre-Keys)
+  Public keys uploaded to server; private keys persist in 4 layers, never leaving the device
+
+On Sending Messages:
+  Sender downloads recipient's IK public key
+  Generates ephemeral ECDH key pair (unique per message)
+  X25519 ECDH → shared secret → XSalsa20-Poly1305 encryption
+  Ephemeral public key attached to message header; recipient destroys it after decryption
+
+What the Server Sees:
+  ✅ Ciphertext blob + routing metadata (sender/recipient UUID)
+  ❌ Plaintext / private keys / ephemeral keys / call content
+```
+
+---
+
+## 📄 License
+
+This project is licensed under the [GNU Affero General Public License v3.0 (AGPL-3.0)](LICENSE), consistent with the upstream repository [619dev/Paperphone-plus](https://github.com/619dev/Paperphone-plus).
+
+In summary:
+- ✅ Free to deploy and use by individuals and enterprises
+- ✅ Modification is permitted
+- ⚠️ If you provide a modified version as a network service, you must release the modified source code
+- ⚠️ Derivative works must use the same license (AGPL-3.0)
+- ⚠️ Original copyright notices and license information must be preserved
+
+See the full license text in the [LICENSE](LICENSE) file.
+
+---
+
+## 🤝 Contributing
+
+Contributions via Issues and Pull Requests are welcome!
+
+1. Fork this repository
+2. Create a feature branch (`git checkout -b feature/your-feature`)
+3. Commit your changes (`git commit -m 'Add your feature'`)
+4. Push to the branch (`git push origin feature/your-feature`)
+5. Open a Pull Request
+
+---
+
+## 📬 Contact
+
+- Telegram Group: https://t.me/+vHJtvWJY_gEyMTUx
+- Upstream Issues: https://github.com/619dev/Paperphone-plus/issues
