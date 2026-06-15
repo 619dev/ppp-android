@@ -1,8 +1,8 @@
-# PaperPhone Plus — Android Client
+# PaperPhonePlus — Android Client
 
 🌐 **其他语言 / Other Languages:** [中文](README.md)
 
-> This repository is the **Android native client** (Capacitor-wrapped) of [PaperPhone Plus](https://github.com/619dev/Paperphone-plus), built from the upstream frontend codebase for Google Play and sideload distribution.
+> This repository is the **Android native client** (Capacitor-wrapped) of [PaperPhonePlus](https://github.com/619dev/Paperphone-plus), built from the upstream frontend codebase for Google Play and sideload distribution.
 
 [![Upstream](https://img.shields.io/badge/Upstream-619dev%2FPaperphone--plus-blue?logo=github)](https://github.com/619dev/Paperphone-plus)
 [![React](https://img.shields.io/badge/React-19-blue)](#)
@@ -16,7 +16,7 @@
 
 ## 📖 Overview
 
-PaperPhone Plus is a WeChat-style end-to-end encrypted instant messaging application. This repository contains the Android native client, which uses [Capacitor](https://capacitorjs.com/) to package the React + TypeScript frontend into an Android APK/AAB.
+PaperPhonePlus is a WeChat-style end-to-end encrypted instant messaging application. This repository contains the Android native client, which uses [Capacitor](https://capacitorjs.com/) to package the React + TypeScript frontend into an Android APK/AAB.
 
 ### Key Features
 
@@ -130,7 +130,7 @@ Core settings are in [capacitor.config.ts](capacitor.config.ts):
 | Setting | Value | Description |
 |---------|-------|-------------|
 | `appId` | `com.fm619.paperphoneplus` | Android application package name |
-| `appName` | `PaperPhone` | App display name |
+| `appName` | `PaperPhonePlus` | App display name |
 | `webDir` | `dist` | Frontend build output directory |
 | `androidScheme` | `https` | Required for WebRTC and crypto APIs |
 

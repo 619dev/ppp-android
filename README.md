@@ -1,8 +1,8 @@
-# PaperPhone Plus — Android 客户端
+# PaperPhonePlus — Android 客户端
 
 🌐 **其他语言 / Other Languages:** [English](README_EN.md)
 
-> 本仓库是 [PaperPhone Plus](https://github.com/619dev/Paperphone-plus) 的 **Android 原生客户端**（Capacitor 打包），基于上游前端代码构建，适用于 Google Play 及侧载分发。
+> 本仓库是 [PaperPhonePlus](https://github.com/619dev/Paperphone-plus) 的 **Android 原生客户端**（Capacitor 打包），基于上游前端代码构建，适用于 Google Play 及侧载分发。
 
 [![Upstream](https://img.shields.io/badge/上游仓库-619dev%2FPaperphone--plus-blue?logo=github)](https://github.com/619dev/Paperphone-plus)
 [![React](https://img.shields.io/badge/React-19-blue)](#)
@@ -16,7 +16,7 @@
 
 ## 📖 项目简介
 
-PaperPhone Plus 是一款微信风格的端对端加密即时通讯应用。本仓库为其 Android 原生客户端，使用 [Capacitor](https://capacitorjs.com/) 将 React + TypeScript 前端打包为 Android APK/AAB。
+PaperPhonePlus 是一款微信风格的端对端加密即时通讯应用。本仓库为其 Android 原生客户端，使用 [Capacitor](https://capacitorjs.com/) 将 React + TypeScript 前端打包为 Android APK/AAB。
 
 ### 核心特性
 
@@ -130,7 +130,7 @@ npx cap run android --livereload --external
 | 配置项 | 值 | 说明 |
 |--------|-----|------|
 | `appId` | `com.fm619.paperphoneplus` | Android 应用包名 |
-| `appName` | `PaperPhone` | 应用显示名称 |
+| `appName` | `PaperPhonePlus` | 应用显示名称 |
 | `webDir` | `dist` | 前端构建输出目录 |
 | `androidScheme` | `https` | WebRTC 和 crypto API 需要 HTTPS |
 
