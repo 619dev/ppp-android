@@ -8,6 +8,7 @@
 [![React](https://img.shields.io/badge/React-19-blue)](#)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](#)
 [![Capacitor](https://img.shields.io/badge/Capacitor-8-green)](#)
+[![Version](https://img.shields.io/badge/版本-2.1.9-orange)](package.json)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](LICENSE)
 
 [![Google Play](https://img.shields.io/badge/Google%20Play-下载-green?logo=google-play)](https://play.google.com/store/apps/details?id=com.fm619.paperphoneplus)
@@ -24,8 +25,9 @@ PaperPhonePlus 是一款微信风格的端对端加密即时通讯应用。本�
 |------|------|
 | 🔐 端对端加密 | 无状态 ECDH + XSalsa20-Poly1305，逐消息临时密钥，前向保密 |
 | 🗝️ 零知识服务器 | 服务器只存储密文，私钥仅在设备本地（四层持久化） |
-| 📹 视频/语音通话 | WebRTC P2P（1:1）+ Mesh（多人），Cloudflare TURN 穿透 |
+| 📹 视频/语音通话 | WebRTC P2P（1:1）+ LiveKit SFU 群组会议（最多 100 人），支持自由讨论与讲课模式 |
 | 🎙️ 实时变声 | 语音消息 / 通话支持 3 档变声（0.8x / 1.0x / 1.2x） |
+| 📱 会话保持 | 网络中断、普通鉴权失败或服务器地址变化时保留登录状态，仅在服务器明确撤销会话时退出 |
 | 👥 群聊 | 最多 2000 人群组，支持加密与未加密两种模式 |
 | 💬 消息功能 | 文字、图片、视频、文件、语音消息、Emoji 面板、Telegram 贴纸包、已读状态 |
 | 🌐 朋友圈 | 发动态（文字+图片/视频）、点赞、评论、标签可见性控制 |
@@ -34,6 +36,12 @@ PaperPhonePlus 是一款微信风格的端对端加密即时通讯应用。本�
 | 🌐 多语言 | 中文、英文、日语、韩语、法语、德语、俄语、西班牙语 |
 | 🔑 两步验证 | Google Authenticator 兼容 TOTP，8 个恢复码 |
 | 📷 扫码 | 扫二维码添加好友、加入群聊 |
+
+### 最近更新（v2.1.9）
+
+- 群组通话升级为基于 LiveKit SFU 的视频会议，单个客户端只需维护一条媒体连接。
+- 会议最多支持 100 人，并提供参会者列表、主持人全员静音、自由讨论和讲课模式。
+- 改进会话保持：临时网络或鉴权故障不再清除本地登录状态；服务器明确撤销、停用或删除账户时仍会安全退出。
 
 ---
 
@@ -54,10 +62,12 @@ ppp-android/
 │   │   ├── keystore.ts       # 四层私钥持久化
 │   │   └── groupCrypto.ts    # 群组加密（Sender Key 协议）
 │   ├── hooks/                # 自定义 Hooks
+│   │   └── useGroupCall.ts   # LiveKit 群组会议与主持控制
 │   ├── i18n/                 # 多语言支持
 │   ├── pages/                # 页面组件
 │   ├── store/                # Zustand 状态管理
 │   └── utils/                # 工具函数
+│       └── session.ts        # 会话终止信号识别与安全退出
 ├── capacitor.config.ts       # Capacitor 配置
 ├── vite.config.ts            # Vite 构建配置
 ├── package.json              # 依赖管理
@@ -72,7 +82,7 @@ ppp-android/
 - **原生桥接**：Capacitor 8（Android）
 - **加密库**：libsodium-wrappers-sumo（WebAssembly，Curve25519 / XSalsa20-Poly1305）
 - **抗量子加密**：crystals-kyber-js（CRYSTALS-Kyber 后量子密钥封装）
-- **视频通话**：WebRTC API
+- **视频通话**：WebRTC API（1:1）+ LiveKit SFU（群组会议）
 - **推送通知**：Firebase Cloud Messaging (FCM)
 - **UI 图标**：Lucide React
 - **动画**：Lottie Web

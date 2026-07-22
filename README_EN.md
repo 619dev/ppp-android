@@ -8,6 +8,7 @@
 [![React](https://img.shields.io/badge/React-19-blue)](#)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](#)
 [![Capacitor](https://img.shields.io/badge/Capacitor-8-green)](#)
+[![Version](https://img.shields.io/badge/Version-2.1.9-orange)](package.json)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](LICENSE)
 
 [![Google Play](https://img.shields.io/badge/Google%20Play-Download-green?logo=google-play)](https://play.google.com/store/apps/details?id=com.fm619.paperphoneplus)
@@ -24,8 +25,9 @@ PaperPhonePlus is a WeChat-style end-to-end encrypted instant messaging applicat
 |---------|-------------|
 | 🔐 End-to-End Encryption | Stateless ECDH + XSalsa20-Poly1305, per-message ephemeral keys, forward secrecy |
 | 🗝️ Zero-Knowledge Server | Server stores only ciphertext; private keys stay on device (4-layer persistence) |
-| 📹 Video/Voice Calls | WebRTC P2P (1:1) + Mesh (group), Cloudflare TURN traversal |
+| 📹 Video/Voice Calls | WebRTC P2P (1:1) + LiveKit SFU group meetings (up to 100 participants), with discussion and lecture modes |
 | 🎙️ Real-time Voice Changer | Voice messages & calls support 3 modes (0.8x / 1.0x / 1.2x) |
+| 📱 Session Persistence | Keeps users signed in through network loss, ordinary authorization failures, and server URL changes; signs out only on an explicit server revocation |
 | 👥 Group Chat | Up to 2,000 members, encrypted & unencrypted modes |
 | 💬 Rich Messaging | Text, images, video, files, voice messages, emoji panel, Telegram sticker packs, read receipts |
 | 🌐 Moments | Post updates (text + images/video), likes, comments, tag-based visibility |
@@ -34,6 +36,12 @@ PaperPhonePlus is a WeChat-style end-to-end encrypted instant messaging applicat
 | 🌐 Multi-language | Chinese, English, Japanese, Korean, French, German, Russian, Spanish |
 | 🔑 Two-Factor Auth | Google Authenticator-compatible TOTP with 8 recovery codes |
 | 📷 QR Code Scanning | Scan to add friends or join groups |
+
+### What's New in v2.1.9
+
+- Group calls now use a LiveKit SFU, so each client maintains only one media connection.
+- Meetings support up to 100 participants, a participant panel, host-controlled mute-all, and discussion or lecture modes.
+- Session persistence no longer clears local login state after transient network or authorization failures; explicit revocation, account suspension, or account deletion still signs the user out safely.
 
 ---
 
@@ -54,10 +62,12 @@ ppp-android/
 │   │   ├── keystore.ts       # 4-layer private key persistence
 │   │   └── groupCrypto.ts    # Group encryption (Sender Key protocol)
 │   ├── hooks/                # Custom hooks
+│   │   └── useGroupCall.ts   # LiveKit group meetings and host controls
 │   ├── i18n/                 # Internationalization
 │   ├── pages/                # Page components
 │   ├── store/                # Zustand state management
 │   └── utils/                # Utility functions
+│       └── session.ts        # Session termination detection and safe sign-out
 ├── capacitor.config.ts       # Capacitor configuration
 ├── vite.config.ts            # Vite build configuration
 ├── package.json              # Dependency management
@@ -72,7 +82,7 @@ ppp-android/
 - **Native Bridge**: Capacitor 8 (Android)
 - **Crypto Library**: libsodium-wrappers-sumo (WebAssembly, Curve25519 / XSalsa20-Poly1305)
 - **Post-Quantum Crypto**: crystals-kyber-js (CRYSTALS-Kyber key encapsulation)
-- **Video Calls**: WebRTC API
+- **Video Calls**: WebRTC API (1:1) + LiveKit SFU (group meetings)
 - **Push Notifications**: Firebase Cloud Messaging (FCM)
 - **UI Icons**: Lucide React
 - **Animations**: Lottie Web
