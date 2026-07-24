@@ -8,7 +8,7 @@
 [![React](https://img.shields.io/badge/React-19-blue)](#)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](#)
 [![Capacitor](https://img.shields.io/badge/Capacitor-8-green)](#)
-[![Version](https://img.shields.io/badge/Version-2.2.1-orange)](package.json)
+[![Version](https://img.shields.io/badge/Version-2.2.3-orange)](package.json)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](LICENSE)
 
 [![Google Play](https://img.shields.io/badge/Google%20Play-Download-green?logo=google-play)](https://play.google.com/store/apps/details?id=com.fm619.paperphoneplus)
@@ -38,8 +38,10 @@ PaperPhonePlus is a WeChat-style end-to-end encrypted instant messaging applicat
 | 🔑 Two-Factor Auth | Google Authenticator-compatible TOTP with 8 recovery codes |
 | 📷 QR Code Scanning | Scan to add friends or join groups |
 
-### What's New in v2.2.1
+### What's New in v2.2.3
 
+- Fixed friend search with Chinese usernames by preventing IME candidate confirmation from prematurely triggering a search.
+- Search terms are now Unicode-normalized and encoded as UTF-8 query parameters consistently.
 - Added account-isolated offline caching for contacts, groups, chats, Moments, Timeline, and media.
 - Increased the local chat history cache from 200 to 2,000 messages per conversation and added a manual cache-clearing option in Profile.
 - Group calls now use a LiveKit SFU, so each client maintains only one media connection.
