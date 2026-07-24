@@ -8,7 +8,7 @@
 [![React](https://img.shields.io/badge/React-19-blue)](#)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](#)
 [![Capacitor](https://img.shields.io/badge/Capacitor-8-green)](#)
-[![Version](https://img.shields.io/badge/版本-2.2.0-orange)](package.json)
+[![Version](https://img.shields.io/badge/版本-2.2.1-orange)](package.json)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](LICENSE)
 
 [![Google Play](https://img.shields.io/badge/Google%20Play-下载-green?logo=google-play)](https://play.google.com/store/apps/details?id=com.fm619.paperphoneplus)
@@ -28,6 +28,7 @@ PaperPhonePlus 是一款微信风格的端对端加密即时通讯应用。本�
 | 📹 视频/语音通话 | WebRTC P2P（1:1）+ LiveKit SFU 群组会议（最多 100 人），支持自由讨论与讲课模式 |
 | 🎙️ 实时变声 | 语音消息 / 通话支持 3 档变声（0.8x / 1.0x / 1.2x） |
 | 📱 会话保持 | 网络中断、普通鉴权失败或服务器地址变化时保留登录状态，仅在服务器明确撤销会话时退出 |
+| 📴 离线访问 | 按账户缓存联系人、群组、聊天记录、朋友圈、时间线及媒体，断网时仍可浏览已缓存内容 |
 | 👥 群聊 | 最多 2000 人群组，支持加密与未加密两种模式 |
 | 💬 消息功能 | 文字、图片、视频、文件、语音消息、Emoji 面板、Telegram 贴纸包、已读状态 |
 | 🌐 朋友圈 | 发动态（文字+图片/视频）、点赞、评论、标签可见性控制 |
@@ -37,8 +38,10 @@ PaperPhonePlus 是一款微信风格的端对端加密即时通讯应用。本�
 | 🔑 两步验证 | Google Authenticator 兼容 TOTP，8 个恢复码 |
 | 📷 扫码 | 扫二维码添加好友、加入群聊 |
 
-### 最近更新（v2.2.0）
+### 最近更新（v2.2.1）
 
+- 新增按账户隔离的离线缓存，可在断网时查看已缓存的联系人、群组、聊天记录、朋友圈、时间线和媒体内容。
+- 单个会话的本地聊天记录缓存上限由 200 条提升至 2000 条，并可在“个人资料”中手动清理本地缓存。
 - 群组通话升级为基于 LiveKit SFU 的视频会议，单个客户端只需维护一条媒体连接。
 - 会议最多支持 100 人，并提供参会者列表、主持人全员静音、自由讨论和讲课模式。
 - 改进会话保持：临时网络或鉴权故障不再清除本地登录状态；服务器明确撤销、停用或删除账户时仍会安全退出。
@@ -67,6 +70,7 @@ ppp-android/
 │   ├── pages/                # 页面组件
 │   ├── store/                # Zustand 状态管理
 │   └── utils/                # 工具函数
+│       ├── offlineCache.ts   # 按账户隔离的数据与媒体离线缓存
 │       └── session.ts        # 会话终止信号识别与安全退出
 ├── capacitor.config.ts       # Capacitor 配置
 ├── vite.config.ts            # Vite 构建配置
