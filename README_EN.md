@@ -8,7 +8,7 @@
 [![React](https://img.shields.io/badge/React-19-blue)](#)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](#)
 [![Capacitor](https://img.shields.io/badge/Capacitor-8-green)](#)
-[![Version](https://img.shields.io/badge/Version-2.2.3-orange)](package.json)
+[![Version](https://img.shields.io/badge/Version-2.2.4-orange)](package.json)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](LICENSE)
 
 [![Google Play](https://img.shields.io/badge/Google%20Play-Download-green?logo=google-play)](https://play.google.com/store/apps/details?id=com.fm619.paperphoneplus)
@@ -38,15 +38,11 @@ PaperPhonePlus is a WeChat-style end-to-end encrypted instant messaging applicat
 | 🔑 Two-Factor Auth | Google Authenticator-compatible TOTP with 8 recovery codes |
 | 📷 QR Code Scanning | Scan to add friends or join groups |
 
-### What's New in v2.2.3
+### What's New in v2.2.4
 
-- Fixed friend search with Chinese usernames by preventing IME candidate confirmation from prematurely triggering a search.
-- Search terms are now Unicode-normalized and encoded as UTF-8 query parameters consistently.
-- Added account-isolated offline caching for contacts, groups, chats, Moments, Timeline, and media.
-- Increased the local chat history cache from 200 to 2,000 messages per conversation and added a manual cache-clearing option in Profile.
-- Group calls now use a LiveKit SFU, so each client maintains only one media connection.
-- Meetings support up to 100 participants, a participant panel, host-controlled mute-all, and discussion or lecture modes.
-- Session persistence no longer clears local login state after transient network or authorization failures; explicit revocation, account suspension, or account deletion still signs the user out safely.
+- Friend search now displays a clear message when no matching users are found.
+- Friend search failures now show the error reason to help diagnose network or service issues.
+- Added Chinese, English, Japanese, Korean, French, German, Russian, and Spanish translations for the new search states.
 
 ---
 

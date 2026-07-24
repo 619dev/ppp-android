@@ -8,7 +8,7 @@
 [![React](https://img.shields.io/badge/React-19-blue)](#)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](#)
 [![Capacitor](https://img.shields.io/badge/Capacitor-8-green)](#)
-[![Version](https://img.shields.io/badge/版本-2.2.3-orange)](package.json)
+[![Version](https://img.shields.io/badge/版本-2.2.4-orange)](package.json)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](LICENSE)
 
 [![Google Play](https://img.shields.io/badge/Google%20Play-下载-green?logo=google-play)](https://play.google.com/store/apps/details?id=com.fm619.paperphoneplus)
@@ -38,15 +38,11 @@ PaperPhonePlus 是一款微信风格的端对端加密即时通讯应用。本�
 | 🔑 两步验证 | Google Authenticator 兼容 TOTP，8 个恢复码 |
 | 📷 扫码 | 扫二维码添加好友、加入群聊 |
 
-### 最近更新（v2.2.3）
+### 最近更新（v2.2.4）
 
-- 修复使用中文输入法搜索好友时，确认候选词会提前触发搜索、导致中文用户名无法搜索的问题。
-- 搜索关键词现会进行 Unicode 归一化和规范的 UTF-8 查询参数编码。
-- 新增按账户隔离的离线缓存，可在断网时查看已缓存的联系人、群组、聊天记录、朋友圈、时间线和媒体内容。
-- 单个会话的本地聊天记录缓存上限由 200 条提升至 2000 条，并可在“个人资料”中手动清理本地缓存。
-- 群组通话升级为基于 LiveKit SFU 的视频会议，单个客户端只需维护一条媒体连接。
-- 会议最多支持 100 人，并提供参会者列表、主持人全员静音、自由讨论和讲课模式。
-- 改进会话保持：临时网络或鉴权故障不再清除本地登录状态；服务器明确撤销、停用或删除账户时仍会安全退出。
+- 好友搜索没有匹配结果时，现在会显示明确提示。
+- 好友搜索请求失败时，现在会显示错误原因，便于排查网络或服务异常。
+- 为上述搜索状态补充中文、英文、日语、韩语、法语、德语、俄语和西班牙语翻译。
 
 ---
 
