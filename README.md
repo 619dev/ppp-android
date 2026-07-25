@@ -8,7 +8,7 @@
 [![React](https://img.shields.io/badge/React-19-blue)](#)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](#)
 [![Capacitor](https://img.shields.io/badge/Capacitor-8-green)](#)
-[![Version](https://img.shields.io/badge/版本-2.2.4-orange)](package.json)
+[![Version](https://img.shields.io/badge/版本-2.2.5-orange)](package.json)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](LICENSE)
 
 [![Google Play](https://img.shields.io/badge/Google%20Play-下载-green?logo=google-play)](https://play.google.com/store/apps/details?id=com.fm619.paperphoneplus)
@@ -38,11 +38,10 @@ PaperPhonePlus 是一款微信风格的端对端加密即时通讯应用。本�
 | 🔑 两步验证 | Google Authenticator 兼容 TOTP，8 个恢复码 |
 | 📷 扫码 | 扫二维码添加好友、加入群聊 |
 
-### 最近更新（v2.2.4）
+### 最近更新（v2.2.5）
 
-- 好友搜索没有匹配结果时，现在会显示明确提示。
-- 好友搜索请求失败时，现在会显示错误原因，便于排查网络或服务异常。
-- 为上述搜索状态补充中文、英文、日语、韩语、法语、德语、俄语和西班牙语翻译。
+- 修复 Android 私聊视频通话连接后，本地视频画中画可能不显示的问题。
+- 在本地或远端视频元素挂载、重建时自动重新绑定已有媒体流，提高通话画面的可靠性。
 
 ---
 
