@@ -8,7 +8,7 @@
 [![React](https://img.shields.io/badge/React-19-blue)](#)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](#)
 [![Capacitor](https://img.shields.io/badge/Capacitor-8-green)](#)
-[![Version](https://img.shields.io/badge/Version-2.2.6-orange)](package.json)
+[![Version](https://img.shields.io/badge/Version-2.2.7-orange)](package.json)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](LICENSE)
 
 [![Google Play](https://img.shields.io/badge/Google%20Play-Download-green?logo=google-play)](https://play.google.com/store/apps/details?id=com.fm619.paperphoneplus)
@@ -38,10 +38,13 @@ PaperPhonePlus is a WeChat-style end-to-end encrypted instant messaging applicat
 | 🔑 Two-Factor Auth | Google Authenticator-compatible TOTP with 8 recovery codes |
 | 📷 QR Code Scanning | Scan to add friends or join groups |
 
-### What's New in v2.2.6
+### What's New in v2.2.7
 
-- Fixed unread counts increasing again when cached offline messages are replayed after reconnecting.
-- Fixed unread counts not clearing when opening a chat directly from a push notification or deep link.
+- Fixed missing remote audio in one-to-one voice calls and prevented duplicate audio during video calls.
+- Fixed live voice-effect switching and restoration of the original microphone track.
+- Improved contact information placement during video calls to avoid obscuring the remote video.
+- Fixed chat text input sizing and multiline behavior; the input now expands with its content.
+- Improved the voice, emoji, attachment, and send-button layout, and fixed emoji and attachment panel positioning.
 
 ---
 

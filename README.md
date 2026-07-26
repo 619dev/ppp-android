@@ -8,7 +8,7 @@
 [![React](https://img.shields.io/badge/React-19-blue)](#)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](#)
 [![Capacitor](https://img.shields.io/badge/Capacitor-8-green)](#)
-[![Version](https://img.shields.io/badge/版本-2.2.6-orange)](package.json)
+[![Version](https://img.shields.io/badge/版本-2.2.7-orange)](package.json)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](LICENSE)
 
 [![Google Play](https://img.shields.io/badge/Google%20Play-下载-green?logo=google-play)](https://play.google.com/store/apps/details?id=com.fm619.paperphoneplus)
@@ -38,10 +38,13 @@ PaperPhonePlus 是一款微信风格的端对端加密即时通讯应用。本�
 | 🔑 两步验证 | Google Authenticator 兼容 TOTP，8 个恢复码 |
 | 📷 扫码 | 扫二维码添加好友、加入群聊 |
 
-### 最近更新（v2.2.6）
+### 最近更新（v2.2.7）
 
-- 修复断线重连回放离线消息时，已缓存消息仍会重复增加未读数字的问题。
-- 修复通过推送通知或深链直接进入聊天时，未读数字没有清零的问题。
+- 修复私聊语音通话中远端声音无法正常播放的问题，并避免视频通话音频重复播放。
+- 修复通话变声模式的实时切换与恢复原始麦克风轨道。
+- 优化视频通话中的联系人信息布局，减少对远端画面的遮挡。
+- 修复聊天文字输入区域的高度与换行体验，输入框现在可随内容自动扩展。
+- 优化语音、表情、附件和发送按钮布局，并修复表情及附件面板定位。
 
 ---
 
