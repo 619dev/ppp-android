@@ -8,7 +8,7 @@
 [![React](https://img.shields.io/badge/React-19-blue)](#)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](#)
 [![Capacitor](https://img.shields.io/badge/Capacitor-8-green)](#)
-[![Version](https://img.shields.io/badge/版本-2.2.7-orange)](package.json)
+[![Version](https://img.shields.io/badge/版本-2.2.8-orange)](package.json)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](LICENSE)
 
 [![Google Play](https://img.shields.io/badge/Google%20Play-下载-green?logo=google-play)](https://play.google.com/store/apps/details?id=com.fm619.paperphoneplus)
@@ -25,12 +25,12 @@ PaperPhonePlus 是一款微信风格的端对端加密即时通讯应用。本�
 |------|------|
 | 🔐 端对端加密 | 无状态 ECDH + XSalsa20-Poly1305，逐消息临时密钥，前向保密 |
 | 🗝️ 零知识服务器 | 服务器只存储密文，私钥仅在设备本地（四层持久化） |
-| 📹 视频/语音通话 | WebRTC P2P（1:1）+ LiveKit SFU 群组会议（最多 100 人），支持自由讨论与讲课模式 |
+| 📹 视频/语音通话 | 私聊与群组会议统一使用 LiveKit SFU（最多 100 人），支持自由讨论与讲课模式 |
 | 🎙️ 实时变声 | 语音消息 / 通话支持 3 档变声（0.8x / 1.0x / 1.2x） |
 | 📱 会话保持 | 网络中断、普通鉴权失败或服务器地址变化时保留登录状态，仅在服务器明确撤销会话时退出 |
 | 📴 离线访问 | 按账户缓存联系人、群组、聊天记录、朋友圈、时间线及媒体，断网时仍可浏览已缓存内容 |
 | 👥 群聊 | 最多 2000 人群组，支持加密与未加密两种模式 |
-| 💬 消息功能 | 文字、图片、视频、文件、语音消息、Emoji 面板、Telegram 贴纸包、已读状态 |
+| 💬 消息功能 | 文字、图片、视频、文件、语音消息、消息引用、Emoji 面板、Telegram 贴纸包、已读状态 |
 | 🌐 朋友圈 | 发动态（文字+图片/视频）、点赞、评论、标签可见性控制 |
 | 📰 时间线 | 小红书风格公开发帖区，双列瀑布流布局，支持匿名发帖 |
 | 🔔 消息推送 | FCM + OneSignal + ntfy 多通道推送 |
@@ -38,13 +38,12 @@ PaperPhonePlus 是一款微信风格的端对端加密即时通讯应用。本�
 | 🔑 两步验证 | Google Authenticator 兼容 TOTP，8 个恢复码 |
 | 📷 扫码 | 扫二维码添加好友、加入群聊 |
 
-### 最近更新（v2.2.7）
+### 最近更新（v2.2.8）
 
-- 修复私聊语音通话中远端声音无法正常播放的问题，并避免视频通话音频重复播放。
-- 修复通话变声模式的实时切换与恢复原始麦克风轨道。
-- 优化视频通话中的联系人信息布局，减少对远端画面的遮挡。
-- 修复聊天文字输入区域的高度与换行体验，输入框现在可随内容自动扩展。
-- 优化语音、表情、附件和发送按钮布局，并修复表情及附件面板定位。
+- 新增消息引用回复：长按消息即可引用，聊天气泡和会话预览可正确显示引用内容。
+- 私聊语音和视频通话全面切换到 LiveKit SFU，统一媒体连接、重连和轨道订阅机制。
+- 改进通话生命周期处理、远端媒体挂载及实时变声轨道切换。
+- 在个人资料页显示当前应用版本，便于确认安装版本。
 
 ---
 
@@ -70,6 +69,7 @@ ppp-android/
 │   ├── pages/                # 页面组件
 │   ├── store/                # Zustand 状态管理
 │   └── utils/                # 工具函数
+│       ├── messagePayload.ts # 消息正文与引用信息的兼容编码
 │       ├── offlineCache.ts   # 按账户隔离的数据与媒体离线缓存
 │       └── session.ts        # 会话终止信号识别与安全退出
 ├── capacitor.config.ts       # Capacitor 配置
@@ -86,7 +86,7 @@ ppp-android/
 - **原生桥接**：Capacitor 8（Android）
 - **加密库**：libsodium-wrappers-sumo（WebAssembly，Curve25519 / XSalsa20-Poly1305）
 - **抗量子加密**：crystals-kyber-js（CRYSTALS-Kyber 后量子密钥封装）
-- **视频通话**：WebRTC API（1:1）+ LiveKit SFU（群组会议）
+- **视频通话**：LiveKit SFU（私聊与群组会议）
 - **推送通知**：Firebase Cloud Messaging (FCM)
 - **UI 图标**：Lucide React
 - **动画**：Lottie Web

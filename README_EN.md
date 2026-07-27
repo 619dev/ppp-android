@@ -8,7 +8,7 @@
 [![React](https://img.shields.io/badge/React-19-blue)](#)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](#)
 [![Capacitor](https://img.shields.io/badge/Capacitor-8-green)](#)
-[![Version](https://img.shields.io/badge/Version-2.2.7-orange)](package.json)
+[![Version](https://img.shields.io/badge/Version-2.2.8-orange)](package.json)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](LICENSE)
 
 [![Google Play](https://img.shields.io/badge/Google%20Play-Download-green?logo=google-play)](https://play.google.com/store/apps/details?id=com.fm619.paperphoneplus)
@@ -25,12 +25,12 @@ PaperPhonePlus is a WeChat-style end-to-end encrypted instant messaging applicat
 |---------|-------------|
 | 🔐 End-to-End Encryption | Stateless ECDH + XSalsa20-Poly1305, per-message ephemeral keys, forward secrecy |
 | 🗝️ Zero-Knowledge Server | Server stores only ciphertext; private keys stay on device (4-layer persistence) |
-| 📹 Video/Voice Calls | WebRTC P2P (1:1) + LiveKit SFU group meetings (up to 100 participants), with discussion and lecture modes |
+| 📹 Video/Voice Calls | LiveKit SFU for both direct and group calls (up to 100 participants), with discussion and lecture modes |
 | 🎙️ Real-time Voice Changer | Voice messages & calls support 3 modes (0.8x / 1.0x / 1.2x) |
 | 📱 Session Persistence | Keeps users signed in through network loss, ordinary authorization failures, and server URL changes; signs out only on an explicit server revocation |
 | 📴 Offline Access | Account-isolated caching for contacts, groups, chats, Moments, Timeline, and media keeps previously loaded content available offline |
 | 👥 Group Chat | Up to 2,000 members, encrypted & unencrypted modes |
-| 💬 Rich Messaging | Text, images, video, files, voice messages, emoji panel, Telegram sticker packs, read receipts |
+| 💬 Rich Messaging | Text, images, video, files, voice messages, message replies, emoji panel, Telegram sticker packs, read receipts |
 | 🌐 Moments | Post updates (text + images/video), likes, comments, tag-based visibility |
 | 📰 Timeline | Xiaohongshu-style public feed with waterfall layout, anonymous posting |
 | 🔔 Push Notifications | FCM + OneSignal + ntfy multi-channel push |
@@ -38,13 +38,12 @@ PaperPhonePlus is a WeChat-style end-to-end encrypted instant messaging applicat
 | 🔑 Two-Factor Auth | Google Authenticator-compatible TOTP with 8 recovery codes |
 | 📷 QR Code Scanning | Scan to add friends or join groups |
 
-### What's New in v2.2.7
+### What's New in v2.2.8
 
-- Fixed missing remote audio in one-to-one voice calls and prevented duplicate audio during video calls.
-- Fixed live voice-effect switching and restoration of the original microphone track.
-- Improved contact information placement during video calls to avoid obscuring the remote video.
-- Fixed chat text input sizing and multiline behavior; the input now expands with its content.
-- Improved the voice, emoji, attachment, and send-button layout, and fixed emoji and attachment panel positioning.
+- Added message replies: long-press a message to quote it, with reply content shown correctly in chat bubbles and conversation previews.
+- Migrated direct voice and video calls fully to LiveKit SFU for unified media connectivity, reconnection, and track subscription.
+- Improved call lifecycle handling, remote media attachment, and live voice-effect track switching.
+- Added the current app version to the profile page for easier installation verification.
 
 ---
 
@@ -70,6 +69,7 @@ ppp-android/
 │   ├── pages/                # Page components
 │   ├── store/                # Zustand state management
 │   └── utils/                # Utility functions
+│       ├── messagePayload.ts # Compatible message body and reply metadata encoding
 │       ├── offlineCache.ts   # Account-isolated offline data and media cache
 │       └── session.ts        # Session termination detection and safe sign-out
 ├── capacitor.config.ts       # Capacitor configuration
@@ -86,7 +86,7 @@ ppp-android/
 - **Native Bridge**: Capacitor 8 (Android)
 - **Crypto Library**: libsodium-wrappers-sumo (WebAssembly, Curve25519 / XSalsa20-Poly1305)
 - **Post-Quantum Crypto**: crystals-kyber-js (CRYSTALS-Kyber key encapsulation)
-- **Video Calls**: WebRTC API (1:1) + LiveKit SFU (group meetings)
+- **Video Calls**: LiveKit SFU (direct and group calls)
 - **Push Notifications**: Firebase Cloud Messaging (FCM)
 - **UI Icons**: Lucide React
 - **Animations**: Lottie Web
