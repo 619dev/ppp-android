@@ -8,7 +8,7 @@
 [![React](https://img.shields.io/badge/React-19-blue)](#)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](#)
 [![Capacitor](https://img.shields.io/badge/Capacitor-8-green)](#)
-[![Version](https://img.shields.io/badge/Version-2.2.8-orange)](package.json)
+[![Version](https://img.shields.io/badge/Version-2.2.9-orange)](package.json)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](LICENSE)
 
 [![Google Play](https://img.shields.io/badge/Google%20Play-Download-green?logo=google-play)](https://play.google.com/store/apps/details?id=com.fm619.paperphoneplus)
@@ -38,12 +38,12 @@ PaperPhonePlus is a WeChat-style end-to-end encrypted instant messaging applicat
 | 🔑 Two-Factor Auth | Google Authenticator-compatible TOTP with 8 recovery codes |
 | 📷 QR Code Scanning | Scan to add friends or join groups |
 
-### What's New in v2.2.8
+### What's New in v2.2.9
 
-- Added message replies: long-press a message to quote it, with reply content shown correctly in chat bubbles and conversation previews.
-- Migrated direct voice and video calls fully to LiveKit SFU for unified media connectivity, reconnection, and track subscription.
-- Improved call lifecycle handling, remote media attachment, and live voice-effect track switching.
-- Added the current app version to the profile page for easier installation verification.
+- Added persistent Telegram sticker caching so loaded sticker packs and media remain available offline or during temporary server failures.
+- Unified static, animated, and video sticker rendering and caching, with stickers cached locally before sending.
+- Improved Chinese username search with Android IMEs by reading the latest composing text directly from the input.
+- Updated the app version to 2.2.9.
 
 ---
 
@@ -71,6 +71,7 @@ ppp-android/
 │   └── utils/                # Utility functions
 │       ├── messagePayload.ts # Compatible message body and reply metadata encoding
 │       ├── offlineCache.ts   # Account-isolated offline data and media cache
+│       ├── stickerCache.ts   # Persistent Telegram sticker cache
 │       └── session.ts        # Session termination detection and safe sign-out
 ├── capacitor.config.ts       # Capacitor configuration
 ├── vite.config.ts            # Vite build configuration

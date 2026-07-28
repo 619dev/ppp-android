@@ -8,7 +8,7 @@
 [![React](https://img.shields.io/badge/React-19-blue)](#)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](#)
 [![Capacitor](https://img.shields.io/badge/Capacitor-8-green)](#)
-[![Version](https://img.shields.io/badge/版本-2.2.8-orange)](package.json)
+[![Version](https://img.shields.io/badge/版本-2.2.9-orange)](package.json)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](LICENSE)
 
 [![Google Play](https://img.shields.io/badge/Google%20Play-下载-green?logo=google-play)](https://play.google.com/store/apps/details?id=com.fm619.paperphoneplus)
@@ -38,12 +38,12 @@ PaperPhonePlus 是一款微信风格的端对端加密即时通讯应用。本�
 | 🔑 两步验证 | Google Authenticator 兼容 TOTP，8 个恢复码 |
 | 📷 扫码 | 扫二维码添加好友、加入群聊 |
 
-### 最近更新（v2.2.8）
+### 最近更新（v2.2.9）
 
-- 新增消息引用回复：长按消息即可引用，聊天气泡和会话预览可正确显示引用内容。
-- 私聊语音和视频通话全面切换到 LiveKit SFU，统一媒体连接、重连和轨道订阅机制。
-- 改进通话生命周期处理、远端媒体挂载及实时变声轨道切换。
-- 在个人资料页显示当前应用版本，便于确认安装版本。
+- 新增 Telegram 贴纸持久化缓存，已加载的贴纸包及贴纸媒体可在离线或服务器暂时不可用时继续使用。
+- 统一静态、动画和视频贴纸的渲染与本地缓存流程，并在发送前完成贴纸缓存。
+- 改进 Android 输入法下的中文用户名搜索，直接读取输入框的最新合成文本。
+- 应用版本更新至 2.2.9。
 
 ---
 
@@ -71,6 +71,7 @@ ppp-android/
 │   └── utils/                # 工具函数
 │       ├── messagePayload.ts # 消息正文与引用信息的兼容编码
 │       ├── offlineCache.ts   # 按账户隔离的数据与媒体离线缓存
+│       ├── stickerCache.ts   # Telegram 贴纸持久化缓存
 │       └── session.ts        # 会话终止信号识别与安全退出
 ├── capacitor.config.ts       # Capacitor 配置
 ├── vite.config.ts            # Vite 构建配置
