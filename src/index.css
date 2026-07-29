@@ -59,10 +59,15 @@
 
   --header-h: 56px;
   --tabbar-h: 52px;
-  --safe-top: env(safe-area-inset-top, 0px);
-  --safe-bottom: env(safe-area-inset-bottom, 0px);
-  --safe-left: env(safe-area-inset-left, 0px);
-  --safe-right: env(safe-area-inset-right, 0px);
+  /*
+   * Capacitor 8 injects --safe-area-inset-* from Android WindowInsets.
+   * Chromium's env(safe-area-inset-*) can still be zero on Pixel devices,
+   * so use the larger of the WebView and native values on every edge.
+   */
+  --safe-top: max(env(safe-area-inset-top, 0px), var(--safe-area-inset-top, 0px));
+  --safe-bottom: max(env(safe-area-inset-bottom, 0px), var(--safe-area-inset-bottom, 0px));
+  --safe-left: max(env(safe-area-inset-left, 0px), var(--safe-area-inset-left, 0px));
+  --safe-right: max(env(safe-area-inset-right, 0px), var(--safe-area-inset-right, 0px));
 
   /* ── Motion (iOS spring curves) ─────────────────────────── */
   --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -213,7 +218,8 @@ body {
   min-height: calc(var(--header-h) + var(--safe-top));
   display: flex;
   align-items: center;
-  padding: 0 16px;
+  padding-left: max(16px, var(--safe-left));
+  padding-right: max(16px, var(--safe-right));
   padding-top: var(--safe-top);
   border-bottom: 0.5px solid var(--glass-border-bottom);
   z-index: 10;
@@ -260,7 +266,10 @@ body {
   border-bottom: none;
   border-left: none;
   border-right: none;
-  margin: 0 12px calc(8px + var(--safe-bottom));
+  margin-top: 0;
+  margin-right: max(12px, var(--safe-right));
+  margin-bottom: calc(8px + var(--safe-bottom));
+  margin-left: max(12px, var(--safe-left));
   border-radius: var(--radius-xl);
   overflow: hidden;
   flex-shrink: 0;
@@ -1414,7 +1423,7 @@ textarea.input {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   iPhone 12+ Responsive Adaptations
+   Compact Phone Responsive Adaptations (iPhone + Google Pixel)
    iPhone 12 mini:       375 × 812pt  (safe-top: 47pt, safe-bottom: 34pt)
    iPhone 12/12 Pro:     390 × 844pt  (safe-top: 47pt, safe-bottom: 34pt)
    iPhone 13/13 Pro/14:  390 × 844pt  (safe-top: 47pt, safe-bottom: 34pt)
@@ -1427,7 +1436,7 @@ textarea.input {
    iPhone 16 Pro Max:    440 × 956pt  (safe-top: 59pt Dynamic Island, safe-bottom: 34pt)
    ═══════════════════════════════════════════════════════════════ */
 
-/* ── iPhone 12 mini (375pt wide, smallest notch iPhone) ───── */
+/* ── Compact phones (Pixel 2–5, Pixel 6a–9a, iPhone mini) ─── */
 @media screen and (max-width: 375px) {
   :root {
     --header-h: 48px;
@@ -1439,7 +1448,8 @@ textarea.input {
   }
 
   .page-header {
-    padding: 0 12px;
+    padding-left: max(12px, var(--safe-left));
+    padding-right: max(12px, var(--safe-right));
     padding-top: var(--safe-top);
   }
 
@@ -1469,7 +1479,9 @@ textarea.input {
   }
 
   .tabbar {
-    margin: 0 8px calc(6px + var(--safe-bottom));
+    margin-right: max(8px, var(--safe-right));
+    margin-bottom: calc(6px + var(--safe-bottom));
+    margin-left: max(8px, var(--safe-left));
   }
 
   .tabbar-item {
@@ -1569,16 +1581,19 @@ textarea.input {
   }
 
   .page-header {
-    padding: 0 14px;
+    padding-left: max(14px, var(--safe-left));
+    padding-right: max(14px, var(--safe-right));
     padding-top: var(--safe-top);
   }
 
   .tabbar {
-    margin: 0 10px calc(6px + var(--safe-bottom));
+    margin-right: max(10px, var(--safe-right));
+    margin-bottom: calc(6px + var(--safe-bottom));
+    margin-left: max(10px, var(--safe-left));
   }
 }
 
-/* ── iPhone 14 Pro / 15 / 16 (393pt, Dynamic Island) ──────── */
+/* ── Standard phones (Pixel 6–10/Pro, recent iPhones) ─────── */
 @media screen and (min-width: 393px) and (max-width: 430px) {
   :root {
     --header-h: 54px;
@@ -1586,7 +1601,7 @@ textarea.input {
   }
 }
 
-/* ── iPhone Pro Max / Plus models (428-440pt) ─────────────── */
+/* ── Large phones and foldable cover screens ──────────────── */
 @media screen and (min-width: 428px) and (max-width: 480px) {
   :root {
     --header-h: 56px;
@@ -1773,25 +1788,6 @@ textarea.input {
   .chat-messages {
     padding-left: max(12px, var(--safe-left));
     padding-right: max(12px, var(--safe-right));
-  }
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   Notch / Dynamic Island — Prevent Content Overlap
-   Uses @supports to only apply when env() is available (iOS 11+)
-   ═══════════════════════════════════════════════════════════════ */
-@supports (padding-top: env(safe-area-inset-top)) {
-  /* Ensure fixed/absolute positioned elements don't slip behind notch */
-  .page-header {
-    padding-top: env(safe-area-inset-top, 0px);
-  }
-
-  .chat-input-bar {
-    padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
-  }
-
-  .tabbar {
-    margin-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
   }
 }
 

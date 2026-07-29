@@ -10,6 +10,11 @@ const config: CapacitorConfig = {
     iosScheme: 'https',
   },
   plugins: {
+    SystemBars: {
+      // Android 15+ is edge-to-edge. Capacitor derives these values from
+      // WindowInsets (including Pixel display cutouts and navigation modes).
+      insetsHandling: 'css',
+    },
     SplashScreen: {
       launchAutoHide: true,
       launchShowDuration: 2000,
