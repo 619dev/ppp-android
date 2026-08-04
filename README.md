@@ -8,7 +8,7 @@
 [![React](https://img.shields.io/badge/React-19-blue)](#)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](#)
 [![Capacitor](https://img.shields.io/badge/Capacitor-8-green)](#)
-[![Version](https://img.shields.io/badge/版本-2.3.0-orange)](package.json)
+[![Version](https://img.shields.io/badge/版本-2.3.1-orange)](package.json)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](LICENSE)
 
 [![Google Play](https://img.shields.io/badge/Google%20Play-下载-green?logo=google-play)](https://play.google.com/store/apps/details?id=com.fm619.paperphoneplus)
@@ -38,13 +38,14 @@ PaperPhonePlus 是一款微信风格的端对端加密即时通讯应用。本�
 | 🔑 两步验证 | Google Authenticator 兼容 TOTP，8 个恢复码 |
 | 📷 扫码 | 扫二维码添加好友、加入群聊 |
 
-### 最近更新（v2.3.0）
+### 最近更新（v2.3.1）
 
-- 新增 Google Pixel 全系列屏幕适配，覆盖标准版、Pro、Pro XL、a 系列及 Fold 封面屏。
-- 使用 Android 原生 WindowInsets 动态适配状态栏、居中挖孔和底部系统导航区域。
-- 修复部分 Pixel 设备顶部操作按钮进入挖孔区域、底部导航栏被手势条或三键导航遮挡的问题。
-- 改进横屏左右安全区域以及不同屏幕尺寸下的顶部栏和底部导航边距。
-- 应用版本更新至 2.3.0。
+- 全面更新会话保持策略，加入短期访问令牌自动刷新与旧会话平滑升级。
+- WebSocket 增加鉴权确认、心跳超时检测、指数退避重连，并在网络切换或应用恢复前台时主动重连。
+- 新增消息补偿同步与本地发送队列，离线消息可在恢复连接后续传，并通过客户端消息 ID 去重、对账。
+- 保持离线状态下的本地账号和缓存数据；只有服务端明确撤销会话时才自动退出。
+- 保留 v2.3.0 的 Google Pixel 全系列 WindowInsets 与安全区域适配。
+- 应用版本更新至 2.3.1。
 
 ---
 
