@@ -8,7 +8,7 @@
 [![React](https://img.shields.io/badge/React-19-blue)](#)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](#)
 [![Capacitor](https://img.shields.io/badge/Capacitor-8-green)](#)
-[![Version](https://img.shields.io/badge/Version-2.4.1-orange)](package.json)
+[![Version](https://img.shields.io/badge/Version-2.4.2-orange)](package.json)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](LICENSE)
 
 [![Google Play](https://img.shields.io/badge/Google%20Play-Download-green?logo=google-play)](https://play.google.com/store/apps/details?id=com.fm619.paperphoneplus)
@@ -38,7 +38,10 @@ PaperPhonePlus is a WeChat-style end-to-end encrypted instant messaging applicat
 | 🔑 Two-Factor Auth | Google Authenticator-compatible TOTP with 8 recovery codes |
 | 📷 QR Code Scanning | Scan to add friends or join groups |
 
-### What's New in v2.4.1
+### What's New in v2.4.2
+
+- Text appearance now hides protocol metadata and optimistic caches no longer retain original message bodies.
+- Extra message-history encryption moved to Profile > Message privacy and applies globally to all chats.
 
 - Encrypted sends now fail closed instead of falling back to plaintext, and each message reports its actual `PQ v2`, `X25519 ↓`, or `SK vN` protocol.
 - Added an optional chat-history password, eight presentation codecs, and automatic locking 5/15/30/60 minutes after leaving the foreground.

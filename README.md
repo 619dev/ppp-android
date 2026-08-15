@@ -8,7 +8,7 @@
 [![React](https://img.shields.io/badge/React-19-blue)](#)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](#)
 [![Capacitor](https://img.shields.io/badge/Capacitor-8-green)](#)
-[![Version](https://img.shields.io/badge/版本-2.4.1-orange)](package.json)
+[![Version](https://img.shields.io/badge/版本-2.4.2-orange)](package.json)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](LICENSE)
 
 [![Google Play](https://img.shields.io/badge/Google%20Play-下载-green?logo=google-play)](https://play.google.com/store/apps/details?id=com.fm619.paperphoneplus)
@@ -38,7 +38,10 @@ PaperPhonePlus 是一款微信风格的端对端加密即时通讯应用。本�
 | 🔑 两步验证 | Google Authenticator 兼容 TOTP，8 个恢复码 |
 | 📷 扫码 | 扫二维码添加好友、加入群聊 |
 
-### 最近更新（v2.4.1）
+### 最近更新（v2.4.2）
+
+- 文本外观现已隐藏协议元数据，发送中的本地缓存不再保留消息原文。
+- 额外聊天记录加密已移至个人信息 > 消息隐私，并全局应用于所有聊天。
 
 - 加密发送改为失败即停止，不再因加密或密钥分发错误回退为明文；消息会显示实际采用的 `PQ v2`、`X25519 ↓` 或 `SK vN`。
 - 新增可选聊天记录额外密码、8 种文本外观编码，以及应用离开前台 5/15/30/60 分钟后的自动锁定。
