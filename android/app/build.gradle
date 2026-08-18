@@ -7,7 +7,7 @@ android {
         applicationId "com.fm619.paperphoneplus"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 24006
+        versionCode 24007
         versionName "2.4.7"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
