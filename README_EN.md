@@ -38,55 +38,9 @@ PaperPhonePlus is a WeChat-style end-to-end encrypted instant messaging applicat
 | 🔑 Two-Factor Auth | Google Authenticator-compatible TOTP with 8 recovery codes |
 | 📷 QR Code Scanning | Scan to add friends or join groups |
 
-### What's New in v2.4.6
+### Changelog
 
-- Text appearance is now clearly documented as extra insurance above the existing end-to-end encryption: the shared extra password encrypts and renders the body first, followed by private-chat E2EE (X25519 / ML-KEM-768) or group Sender Key encryption.
-- Both private-chat participants, or every group member, must agree on and configure the same extra password; it is never uploaded or synchronized.
-- If passwords differ, E2EE and delivery still work, but recipients see only styled ciphertext and cannot read the original body.
-- This feature never replaces, bypasses, or downgrades the original E2EE; the Profile > Message privacy explanation is updated in all eight UI languages.
-
-### What's New in v2.4.4
-
-- Fixed the locked extra-encryption dialog so it requests the unlock password instead of asking users to set one, across all eight languages.
-
-- Fixed a security issue that allowed extra text-appearance encryption to be disabled without password verification; the correct extra password must now be re-entered even while unlocked.
-- Text appearance now hides protocol metadata and optimistic caches no longer retain original message bodies.
-- Extra message-history encryption moved to Profile > Message privacy and applies globally to all chats.
-
-- Encrypted sends now fail closed instead of falling back to plaintext, and each message reports its actual `PQ v2`, `X25519 ↓`, or `SK vN` protocol.
-- Added an optional chat-history password, eight presentation codecs, and automatic locking 5/15/30/60 minutes after leaving the foreground.
-- Locked or incorrectly unlocked histories show presentation ciphertext only; identity private keys and Sender Keys are protected by Android Keystore, with complete UI copy in all eight languages.
-
-#### v2.3.9
-
-- Refreshes the friends list and shows the correct message when the server confirms the users are already friends, matching the repaired friend-request API.
-
-#### v2.3.8
-
-- Fixed the unresponsive back button after the QR scanner starts the camera; closing now stops and releases the camera immediately.
-- Fixed duplicate friend requests to existing friends corrupting the friendship; search results now clearly show “Already friends.”
-
-- Added encryption at rest for local chat history using a device-bound Android Keystore key and AES-256-GCM, with ciphertext stored in a dedicated IndexedDB database.
-- Moved identity private keys and group Sender Keys into secure system-backed storage that cannot be restored onto another device with an app backup.
-- Chat plaintext now remains in memory only; decrypted fields are stripped before persistence, including optimistic outgoing private messages.
-- Added one-time migration and removal of legacy plaintext keys and chat caches from localStorage, sessionStorage, and IndexedDB, plus cleanup of the former unencrypted media cache.
-- Encrypted caches are isolated per account and authenticated against tampering; invalid data is discarded without falling back to plaintext storage.
-
-#### v2.3.3
-
-- Keeps the screen awake while recording voice messages, preventing the recording UI from becoming unresponsive after automatic locking.
-- Limits voice messages to 120 seconds and stops automatically at the limit; processed voice effects are also capped at 120 seconds.
-- Releases the recorder, timers, and microphone when leaving a chat to improve recording stability.
-
-- Added call sleep prevention: the screen stays awake during direct and group voice/video calls.
-- Covers incoming, outgoing, connecting, and connected states, then restores the system screen-timeout policy when the call ends or fails.
-- Uses Android's native window keep-screen-on flag without requesting an additional background wake-lock permission.
-- Overhauled session persistence with automatic short-lived access-token refresh and seamless upgrades for legacy sessions.
-- Added authenticated WebSocket readiness, heartbeat timeout detection, exponential-backoff reconnects, and recovery after network changes or app resume.
-- Added catch-up message synchronization and a durable local outbox so queued messages resume after reconnect and reconcile by client message ID.
-- Preserved local accounts and cached data while offline; automatic sign-out now occurs only after explicit server-side session revocation.
-- Retained the v2.3.0 Google Pixel lineup WindowInsets and safe-area adaptations.
-- Updated the app version to 2.3.2.
+The complete release history has moved to [changelog.md](changelog.md).
 
 ---
 
