@@ -4,6 +4,20 @@ All notable changes and new features are recorded here. Historical entries below
 
 所有重要版本改动和新特性统一记录于此。下方历史条目由仓库原有文档迁移而来。
 
+## 2.5.1
+
+- Synchronized the upstream shared frontend while preserving Android-specific FCM, ntfy, secure storage, and safe-area integrations.
+- Removed Web Push/VAPID and OneSignal client integration, service-worker push handling, browser notification settings, and PWA installation guidance.
+- Updated friend and group QR codes to the `paperphoneplus://` scheme and registered it as an Android deep-link scheme while retaining legacy `paperphone://` links.
+- Updated the application, profile-page display, package metadata, and Android native version to `2.5.1` (`versionCode 25001`).
+
+- 同步上游共享前端，同时保留 Android 专用的 FCM、ntfy、系统安全存储及安全区域适配。
+- 移除 Web Push/VAPID 与 OneSignal 客户端集成、Service Worker 推送处理、浏览器通知设置及 PWA 安装指引。
+- 好友与群组二维码升级为 `paperphoneplus://` 协议，Android 同步注册新深度链接，并保留旧 `paperphone://` 链接兼容。
+- 应用版本、个人信息页显示版本、包元数据及 Android 原生版本统一更新为 `2.5.1`（`versionCode 25001`）。
+
+---
+
 ## 2.4.9
 
 - Adopted the refined PaperPhone mobile design system with platform-native typography, calmer solid message surfaces, restrained gold actions, and reduced glass effects.
