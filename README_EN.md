@@ -8,7 +8,7 @@
 [![React](https://img.shields.io/badge/React-19-blue)](#)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](#)
 [![Capacitor](https://img.shields.io/badge/Capacitor-8-green)](#)
-[![Version](https://img.shields.io/badge/Version-2.5.1-orange)](package.json)
+[![Version](https://img.shields.io/badge/Version-2.5.2-orange)](package.json)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](LICENSE)
 
 [![Google Play](https://img.shields.io/badge/Google%20Play-Download-green?logo=google-play)](https://play.google.com/store/apps/details?id=com.fm619.paperphoneplus)
@@ -42,7 +42,7 @@ PaperPhonePlus is a WeChat-style end-to-end encrypted instant messaging applicat
 
 The complete release history has moved to [changelog.md](changelog.md).
 
-Version `2.5.1` syncs the upstream shared frontend: Web Push/VAPID and OneSignal are removed, Android notifications now use only FCM and ntfy, and in-app QR codes and deep links use the `paperphoneplus://` scheme.
+Version `2.5.2` syncs the upstream shared frontend with batch downloads for up to 20 chat attachments, temporary versus permanent upload classes, and compatibility for file URLs migrated from legacy R2 storage.
 
 ---
 
