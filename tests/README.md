@@ -17,7 +17,7 @@ cd android
 ./gradlew --no-daemon assembleDebug lintRelease
 ```
 
-TypeScript/Vite builds, all five client regression suites, Debug APK generation and Release lint passed for this update. Physical-device acceptance is still separate. Signed Release APK/AAB generation requires the correct `KEYSTORE_PASSWORD` and `KEY_PASSWORD`; the configured fallback password failed to open the current release keystore.
+TypeScript/Vite builds, all five client regression suites, Debug and signed Release APK/AAB generation, and Release lint passed for this update. The Release APK certificate matches version 2.5.2; the package version is 2.6.0 (26000). Physical-device acceptance is still separate. Supply the correct `KEYSTORE_PASSWORD` and `KEY_PASSWORD`; environment variables override the Gradle fallback values.
 
 ## Cryptographic and synchronization coverage
 
