@@ -8,7 +8,7 @@
 [![React](https://img.shields.io/badge/React-19-blue)](#)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](#)
 [![Capacitor](https://img.shields.io/badge/Capacitor-8-green)](#)
-[![Version](https://img.shields.io/badge/Version-2.6.1-orange)](package.json)
+[![Version](https://img.shields.io/badge/Version-2.6.2-orange)](package.json)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](LICENSE)
 
 [![Google Play](https://img.shields.io/badge/Google%20Play-Download-green?logo=google-play)](https://play.google.com/store/apps/details?id=com.fm619.paperphoneplus)
@@ -43,9 +43,9 @@ PaperPhonePlus is a WeChat-style end-to-end encrypted instant messaging applicat
 
 The complete release history has moved to [changelog.md](changelog.md).
 
-Version `2.6.1` retains signed private/group messaging, mutual identity verification, historical group-key epochs, reliable history sync and authenticated attachment downloads, while adding responsive support for recent Xiaomi/Redmi, OPPO/OnePlus and vivo/iQOO phones. Trust records remain protected by Android Keystore.
+Version `2.6.2` retains signed private/group messaging, mutual identity verification, historical group-key epochs, reliable history sync and authenticated attachment downloads, fixes login/registration scrolling on constrained viewports such as Xiaomi 12 Pro, and enables R8 for Android release builds. Trust records remain protected by Android Keystore.
 
-### 2.6.1 Upgrade and Validation
+### 2.6.2 Upgrade and Validation
 
 Upgrade the server and all participating clients together to versions compatible with the 2.6.0-or-later signed protocol. Older clients cannot parse signed messages. Legacy unsigned history is labelled; after an identity is pinned, unsigned messages from that contact are rejected. Group rotation retains available historical key epochs but cannot recover keys lost before the upgrade.
 
@@ -60,7 +60,7 @@ npm run build
 
 ## 🔐 Extra-encrypted text appearance: design and security boundary
 
-This feature is **extra insurance on top of the existing end-to-end encryption (E2EE)**. It does not replace E2EE with a visual encoding, and it never bypasses or weakens the original encryption. In 2.6.1, signed private messages use X25519 key agreement, XSalsa20-Poly1305 encryption and Ed25519 signatures; groups use Sender Key encryption and Ed25519 signatures. Identity private keys and group Sender Keys remain protected by Android Keystore.
+This feature is **extra insurance on top of the existing end-to-end encryption (E2EE)**. It does not replace E2EE with a visual encoding, and it never bypasses or weakens the original encryption. In 2.6.2, signed private messages use X25519 key agreement, XSalsa20-Poly1305 encryption and Ed25519 signatures; groups use Sender Key encryption and Ed25519 signatures. Identity private keys and group Sender Keys remain protected by Android Keystore.
 
 When enabled, every message is processed in this order:
 
@@ -112,7 +112,7 @@ ppp-android/
 - **State Management**: Zustand 5
 - **Native Bridge**: Capacitor 8 (Android)
 - **Crypto Library**: libsodium-wrappers-sumo (WebAssembly, Curve25519 / XSalsa20-Poly1305)
-- **Compatibility Crypto Dependency**: crystals-kyber-js remains available; the 2.6.1 signed path uses X25519. The current registration field `kem_pub` carries an Ed25519 signing public key, not a working post-quantum registration key.
+- **Compatibility Crypto Dependency**: crystals-kyber-js remains available; the 2.6.2 signed path uses X25519. The current registration field `kem_pub` carries an Ed25519 signing public key, not a working post-quantum registration key.
 - **Video Calls**: LiveKit SFU (direct and group calls)
 - **Push Notifications**: Firebase Cloud Messaging (FCM)
 - **UI Icons**: Lucide React
@@ -207,7 +207,7 @@ cd android
 
 Release signing uses `paperphone-release.keystore` with `KEYSTORE_PASSWORD` and `KEY_PASSWORD` supplied securely in the local environment. Do not commit credentials. Supply credentials matching the existing keystore before generating signed release artifacts; do not rely on fallback passwords.
 
-The application version is `2.6.1`, Google Play `versionCode` is `26001`, and the profile footer displays `PaperPhonePlus v2.6.1`. Release outputs are `android/app/build/outputs/bundle/release/app-release.aab` and `android/app/build/outputs/apk/release/app-release.apk`. This source update does not indicate a Google Play upload or publication.
+The application version is `2.6.2`, Google Play `versionCode` is `26002`, and the profile footer displays `PaperPhonePlus v2.6.2`. Release builds use R8. Release outputs are `android/app/build/outputs/bundle/release/app-release.aab` and `android/app/build/outputs/apk/release/app-release.apk`. This source update does not indicate a Google Play upload or publication.
 
 ---
 
