@@ -17,7 +17,7 @@ cd android
 ./gradlew --no-daemon assembleDebug lintRelease
 ```
 
-TypeScript/Vite builds, all five client regression suites, Debug and signed Release APK/AAB generation, and Release lint passed for this update. The Release APK certificate matches version 2.5.2; the package version is 2.6.0 (26000). Physical-device acceptance is still separate. Supply the correct `KEYSTORE_PASSWORD` and `KEY_PASSWORD`; environment variables override the Gradle fallback values.
+For 2.6.1, the TypeScript/Vite build, all five client regression suites, Capacitor sync, signed Release APK/AAB generation, and Release lint pass. The APK uses the existing PaperPhone release certificate and the package version is 2.6.1 (26001). Physical-device acceptance for the new Xiaomi/Redmi, OPPO/OnePlus and vivo/iQOO screen adaptations is still separate. Supply the correct `KEYSTORE_PASSWORD` and `KEY_PASSWORD`; environment variables override the Gradle fallback values.
 
 ## Cryptographic and synchronization coverage
 
@@ -131,6 +131,6 @@ of protocol constants and user-supplied text.
 
 Use two compatible native clients to verify password setup/unlock, both directions of the handshake, profile refresh, focus/visibility refresh and changed-key rejection. Reopen profiles while verification is pending to confirm that challenges survive and retries are throttled. Open the group member list to check refreshed trust, then exercise leave/kick, offline reconnect and pending-key recovery. Check all eight languages, especially interpolated errors, verification prompts and the green badge's meaning.
 
-The application and profile footer version is `2.6.0` (`versionCode 26000`). A source update does not indicate a published release. Tests of this shared source do not validate published native clients or Docker images. Local caches retain at most 2,000 messages per conversation; server-side auto-delete and attachment retention remain applicable. Message signing does not end-to-end encrypt uploaded file bytes, and no upgrade can recreate previously lost keys.
+The application and profile footer version is `2.6.1` (`versionCode 26001`). A source update does not indicate a published release. Tests of this shared source do not validate published native clients or Docker images. Local caches retain at most 2,000 messages per conversation; server-side auto-delete and attachment retention remain applicable. Message signing does not end-to-end encrypt uploaded file bytes, and no upgrade can recreate previously lost keys.
 
 See the [main README](../README_EN.md) and [中文说明](../README.md). These client suites use real cryptography with mocked transport and persistence. They provide regression coverage; native-device UI testing remains separate.

@@ -8,7 +8,7 @@
 [![React](https://img.shields.io/badge/React-19-blue)](#)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](#)
 [![Capacitor](https://img.shields.io/badge/Capacitor-8-green)](#)
-[![Version](https://img.shields.io/badge/版本-2.6.0-orange)](package.json)
+[![Version](https://img.shields.io/badge/版本-2.6.1-orange)](package.json)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](LICENSE)
 
 [![Google Play](https://img.shields.io/badge/Google%20Play-下载-green?logo=google-play)](https://play.google.com/store/apps/details?id=com.fm619.paperphoneplus)
@@ -43,11 +43,11 @@ PaperPhonePlus 是一款微信风格的端对端加密即时通讯应用。本�
 
 完整版本更新记录已迁移至 [changelog.md](changelog.md)。
 
-当前版本 `2.6.0` 同步上游共享前端：新增私聊与群聊消息签名、双向身份验证及身份变化提示，保留历史群密钥以支持离线解密，并修复群历史同步与附件鉴权下载。身份信任记录继续使用 Android Keystore 保护。
+当前版本 `2.6.1` 在保留私聊/群聊消息签名、双向身份验证、历史群密钥、离线同步及附件鉴权下载的基础上，新增近三年小米/Redmi、OPPO/一加、vivo/iQOO 手机屏幕适配。身份信任记录继续使用 Android Keystore 保护。
 
-### 2.6.0 升级与验证
+### 2.6.1 升级与验证
 
-服务端和所有参与聊天的客户端需要同步升级到兼容 2.6.0 签名协议的版本。旧客户端不能解析新签名消息；旧未签名历史会显示警告，已固定身份后将拒绝该联系人的未签名消息。群密钥轮换保留可用历史版本，但无法恢复升级前已丢失的密钥。
+服务端和所有参与聊天的客户端需要同步升级到兼容 2.6.0 及以上签名协议的版本。旧客户端不能解析新签名消息；旧未签名历史会显示警告，已固定身份后将拒绝该联系人的未签名消息。群密钥轮换保留可用历史版本，但无法恢复升级前已丢失的密钥。
 
 ```bash
 npm run test:security
@@ -60,7 +60,7 @@ npm run build
 
 ## 🔐 额外加密文本外观：工作原理与安全边界
 
-这项功能是**建立在原有端到端加密（E2EE）之上的额外保险**，不是用文本外观代替 E2EE，也不会绕过或降低原有加密。2.6.0 私聊签名消息使用 X25519 密钥协商、XSalsa20-Poly1305 加密及 Ed25519 签名；群聊使用 Sender Key 加密及 Ed25519 签名。身份私钥和群聊 Sender Key 继续由 Android Keystore 保护。
+这项功能是**建立在原有端到端加密（E2EE）之上的额外保险**，不是用文本外观代替 E2EE，也不会绕过或降低原有加密。2.6.1 私聊签名消息使用 X25519 密钥协商、XSalsa20-Poly1305 加密及 Ed25519 签名；群聊使用 Sender Key 加密及 Ed25519 签名。身份私钥和群聊 Sender Key 继续由 Android Keystore 保护。
 
 启用后，每条消息按以下顺序处理：
 
@@ -112,7 +112,7 @@ ppp-android/
 - **状态管理**：Zustand 5
 - **原生桥接**：Capacitor 8（Android）
 - **加密库**：libsodium-wrappers-sumo（WebAssembly，Curve25519 / XSalsa20-Poly1305）
-- **兼容加密依赖**：保留 crystals-kyber-js；2.6.0 签名消息路径使用 X25519，当前注册接口的 `kem_pub` 实际承载 Ed25519 签名公钥，不代表已启用抗量子密钥注册。
+- **兼容加密依赖**：保留 crystals-kyber-js；2.6.1 签名消息路径使用 X25519，当前注册接口的 `kem_pub` 实际承载 Ed25519 签名公钥，不代表已启用抗量子密钥注册。
 - **视频通话**：LiveKit SFU（私聊与群组会议）
 - **推送通知**：Firebase Cloud Messaging (FCM)
 - **UI 图标**：Lucide React
@@ -207,7 +207,7 @@ cd android
 
 发布签名使用 `paperphone-release.keystore`，密码由 `KEYSTORE_PASSWORD` 和 `KEY_PASSWORD` 环境变量提供；请在本机安全设置，勿将凭据提交到仓库。生成正式发布包前必须提供与现有密钥库匹配的正确凭据，勿依赖回退密码。
 
-应用版本为 `2.6.0`，Google Play `versionCode` 为 `26000`；个人信息页面底部显示 `PaperPhonePlus v2.6.0`。AAB 位于 `android/app/build/outputs/bundle/release/app-release.aab`，APK 位于 `android/app/build/outputs/apk/release/app-release.apk`。本次代码更新不代表已上传或发布到 Google Play。
+应用版本为 `2.6.1`，Google Play `versionCode` 为 `26001`；个人信息页面底部显示 `PaperPhonePlus v2.6.1`。AAB 位于 `android/app/build/outputs/bundle/release/app-release.aab`，APK 位于 `android/app/build/outputs/apk/release/app-release.apk`。本次代码更新不代表已上传或发布到 Google Play。
 
 ---
 
