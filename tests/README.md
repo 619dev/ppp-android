@@ -17,7 +17,7 @@ cd android
 ./gradlew --no-daemon assembleDebug lintRelease
 ```
 
-For 2.6.2, the TypeScript/Vite build, all five client regression suites, Capacitor sync, R8-enabled signed Release APK/AAB generation, and Release lint pass. The APK uses the existing PaperPhone release certificate and the package version is 2.6.2 (26002). Physical-device acceptance for Xiaomi 12 Pro login/registration scrolling is still separate. Supply the correct `KEYSTORE_PASSWORD` and `KEY_PASSWORD`; environment variables override the Gradle fallback values.
+The commands above validate the Android debug build and release lint. Release builds restrict native libraries to `arm64-v8a`. Signed release packaging requires the existing release keystore and its `KEYSTORE_PASSWORD` and `KEY_PASSWORD`.
 
 ## Cryptographic and synchronization coverage
 
@@ -29,7 +29,7 @@ exact identity plaintext and AEAD binding, missing/wrong passwords, the complete
 three-message mutual handshake, repeated proofs, stale challenges, unsigned
 messages after pinning and substituted identity keys.
 
-The group suite additionally covers signed, identity-pinned key distribution,
+The group suite additionally covers signed key distribution using published member keys,
 message type/sender/group/epoch/nonce/ciphertext tampering, authenticated nickname
 display, concurrent key publication, revoked-member exclusion, old-key failure on
 new ciphertext, multi-epoch catch-up, unsigned history labelling and account
@@ -72,9 +72,11 @@ legacy history remains readable with an explicit unsigned warning and no badge.
 Existing encrypted history whose sender key was already lost before this change
 cannot be recovered cryptographically.
 
-Every group participant's identity must first be established through the private
-password-authenticated handshake. No server-provided signing key is silently
-trusted. The group message signature covers group ID, sender ID, key epoch,
+Sender Key distribution uses server-published member keys and signed envelopes.
+Live message verification uses the current membership and key epoch. History
+and offline messages use the sender’s published identity. Private password
+verification remains independent. New group messages bypass the text-appearance
+layer, and older group ciphertext can still be opened with its original password. The group message signature covers group ID, sender ID, key epoch,
 client message ID, message type, identity/signing keys, nonce, nickname and
 ciphertext. Only successful signature verification produces a green message badge;
 missing decryption keys keep the content locked and eligible for retry. Badges are not loaded as trusted state from the encrypted message cache.
@@ -85,7 +87,7 @@ must cover exactly the current recipients, including an encrypted self copy,
 and each sender can publish only once per epoch. The same lock serializes sends
 and uploads against leave/kick/join. Online clients rotate on notification;
 offline clients discover the durable epoch when reconnecting and before sending.
-If an identity is unverified, sending remains blocked with a verification prompt.
+Missing or inconsistent member public keys can block key distribution.
 
 Historical distributions for continuing recipients are retained by epoch,
 including distributions authored by members who later leave. All distributions
@@ -113,10 +115,8 @@ and replays relevant signed verification receipts from history. An unlocked
 presentation password resumes or initiates a pending handshake automatically.
 Repeated opens share an in-flight refresh and preserve the existing challenge;
 automatic retries are throttled. Key changes revoke trust without replacing the
-pin. Opening the group member list refreshes the member-key snapshot and checks
-each member against the same trust records, without starting group-wide private
-handshakes. Fresh keys propagate to existing contact caches. Both views refresh
-on focus/visibility and update labels and badges on trust changes.
+pin. Opening the group member list refreshes membership and published
+keys. Both views refresh on focus or visibility changes.
 
 ## Eight-language validation
 
@@ -129,8 +129,10 @@ of protocol constants and user-supplied text.
 
 ## Manual acceptance and boundaries
 
-Use two compatible native clients to verify password setup/unlock, both directions of the handshake, profile refresh, focus/visibility refresh and changed-key rejection. Reopen profiles while verification is pending to confirm that challenges survive and retries are throttled. Open the group member list to check refreshed trust, then exercise leave/kick, offline reconnect and pending-key recovery. Check all eight languages, especially interpolated errors, verification prompts and the green badge's meaning.
+Use two compatible native clients to verify password setup/unlock, both directions of the handshake, profile refresh, focus/visibility refresh and changed-key rejection. Reopen profiles while verification is pending to confirm that challenges survive and retries are throttled. Test two group members without private verification, with the text-appearance password locked. Exercise leave/kick, offline reconnect, pending-key recovery and reading older group messages with the original appearance password. Check all eight languages, especially interpolated errors, verification prompts and the green badge's meaning.
 
-The application and profile footer version is `2.6.2` (`versionCode 26002`). A source update does not indicate a published release. Tests of this shared source do not validate published native clients or Docker images. Local caches retain at most 2,000 messages per conversation; server-side auto-delete and attachment retention remain applicable. Message signing does not end-to-end encrypt uploaded file bytes, and no upgrade can recreate previously lost keys.
+With a server containing upstream fixes `d3e95fe` and `0d65d79`, verify that startup repairs a one-sided accepted friendship. On two Android clients, send and accept an invitation, remove the friendship from a user profile, and check that both contact lists and pending requests refresh. Repeat with one client offline and check the refreshed friend list after reconnecting.
+
+The application and profile footer version is `2.6.5` (`versionCode 26005`). A source update does not indicate a published release. Tests of this shared source do not validate published native clients or Docker images. Local caches retain at most 2,000 messages per conversation; server-side auto-delete and attachment retention remain applicable. Message signing does not end-to-end encrypt uploaded file bytes, and no upgrade can recreate previously lost keys.
 
 See the [main README](../README_EN.md) and [中文说明](../README.md). These client suites use real cryptography with mocked transport and persistence. They provide regression coverage; native-device UI testing remains separate.
