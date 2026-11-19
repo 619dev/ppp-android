@@ -8,7 +8,7 @@
 [![React](https://img.shields.io/badge/React-19-blue)](#)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](#)
 [![Capacitor](https://img.shields.io/badge/Capacitor-8-green)](#)
-[![Version](https://img.shields.io/badge/Version-2.6.5-orange)](package.json)
+[![Version](https://img.shields.io/badge/Version-2.6.6-orange)](package.json)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](LICENSE)
 
 [![Google Play](https://img.shields.io/badge/Google%20Play-Download-green?logo=google-play)](https://play.google.com/store/apps/details?id=com.fm619.paperphoneplus)
@@ -43,15 +43,19 @@ PaperPhonePlus is a WeChat-style end-to-end encrypted instant messaging applicat
 
 The complete release history has moved to [changelog.md](changelog.md).
 
-Version `2.6.5` refreshes friends after connecting or receiving a friendship change, adds friend controls to user profiles, and uses published group member keys for signed Sender Key distribution.
+Version `2.6.6` syncs shared frontend `79746d7`: account-isolated persistent caching for avatars, images, videos and attachments, concurrent download deduplication, reconnect refresh and offline fallback. Timeline uploads show progress and prevent duplicate actions during uploads, with improved media presentation. Android native secure storage, push and screen adaptations are retained.
 
-### 2.6.5 Upgrade and Validation
 
-Deploy the upstream server with friendship fixes `d3e95fe` and `0d65d79`. On startup, it repairs reciprocal friendship records and supports the updated friend APIs and `friendship_changed` notifications. Upgrade participating clients to 2.6.5 for the new group trust model. Older clients may still require private identity verification to read group messages.
+Version 2.6.6 passed clean signed AAB/APK packaging and release lint (0 errors, 36 warnings), plus security, attachment, media-cache and eight-language tests. Native-device UI acceptance for this version remains outstanding.
+
+### 2.6.6 Upgrade and Validation
+
+Deploy the upstream server with friendship fixes `d3e95fe` and `0d65d79`. On startup, it repairs reciprocal friendship records and supports the updated friend APIs and `friendship_changed` notifications. Upgrade participating clients to 2.6.6 for the new group trust model. Older clients may still require private identity verification to read group messages.
 
 ```bash
 npm run test:security
 npm run test:attachments
+npm run test:media-cache
 npm run test:i18n
 npm run build
 ```
@@ -60,7 +64,7 @@ npm run build
 
 ## 🔐 Extra-encrypted text appearance: design and security boundary
 
-This feature is **extra insurance on top of the existing end-to-end encryption (E2EE)**. It does not replace E2EE with a visual encoding, and it never bypasses or weakens the original encryption. In 2.6.5, signed private messages use X25519 key agreement, XSalsa20-Poly1305 encryption and Ed25519 signatures; groups use Sender Key encryption and Ed25519 signatures. Identity private keys and group Sender Keys remain protected by Android Keystore.
+This feature is **extra insurance on top of the existing end-to-end encryption (E2EE)**. It does not replace E2EE with a visual encoding, and it never bypasses or weakens the original encryption. In 2.6.6, signed private messages use X25519 key agreement, XSalsa20-Poly1305 encryption and Ed25519 signatures; groups use Sender Key encryption and Ed25519 signatures. Identity private keys and group Sender Keys remain protected by Android Keystore.
 
 When enabled, outgoing private messages use the following steps. New group messages use Sender Key encryption and Ed25519 signatures directly. Earlier group messages with text-appearance encryption can still be read with their original password.
 
@@ -112,7 +116,7 @@ ppp-android/
 - **State Management**: Zustand 5
 - **Native Bridge**: Capacitor 8 (Android)
 - **Crypto Library**: libsodium-wrappers-sumo (WebAssembly, Curve25519 / XSalsa20-Poly1305)
-- **Compatibility Crypto Dependency**: crystals-kyber-js remains available; the 2.6.5 signed path uses X25519. The current registration field `kem_pub` carries an Ed25519 signing public key, not a working post-quantum registration key.
+- **Compatibility Crypto Dependency**: crystals-kyber-js remains available; the 2.6.6 signed path uses X25519. The current registration field `kem_pub` carries an Ed25519 signing public key, not a working post-quantum registration key.
 - **Video Calls**: LiveKit SFU (direct and group calls)
 - **Push Notifications**: Firebase Cloud Messaging (FCM)
 - **UI Icons**: Lucide React
@@ -207,7 +211,7 @@ cd android
 
 Release signing uses `paperphone-release.keystore` with `KEYSTORE_PASSWORD` and `KEY_PASSWORD` supplied securely in the local environment. Do not commit credentials. Supply credentials matching the existing keystore before generating signed release artifacts; do not rely on fallback passwords.
 
-The application version is `2.6.5`, Google Play `versionCode` is `26005`, and the profile footer displays `PaperPhonePlus v2.6.5`. Release builds use R8 and restrict native libraries to `arm64-v8a`. Release outputs are `android/app/build/outputs/bundle/release/app-release.aab` and `android/app/build/outputs/apk/release/app-release.apk`. This source update does not indicate a Google Play upload or publication.
+The application version is `2.6.6`, Google Play `versionCode` is `26006`, and the profile footer displays `PaperPhonePlus v2.6.6`. Release builds use R8 and restrict native libraries to `arm64-v8a`. Release outputs are `android/app/build/outputs/bundle/release/app-release.aab` and `android/app/build/outputs/apk/release/app-release.apk`. This source update does not indicate a Google Play upload or publication.
 
 ---
 

@@ -4,6 +4,20 @@ All notable changes and new features are recorded here. Historical entries below
 
 所有重要版本改动和新特性统一记录于此。下方历史条目由仓库原有文档迁移而来。
 
+## 2.6.6
+
+- Synced shared frontend `79746d7`: persistent account-isolated media cache, download deduplication, reconnect refresh and offline fallback for original media bytes.
+- Improved timeline media presentation and upload progress; prevent duplicate upload/publish actions during uploads.
+- Retained Android Keystore, encrypted chat cache, FCM/ntfy, file export and native screen adaptations. Added media-cache regression coverage and refreshed all maintained guides.
+- Updated package, Android and profile footer to `2.6.6` (`versionCode 26006`). Signed release APK/AAB use R8 and arm64-v8a.
+
+- 同步公共前端 `79746d7`：按账户隔离的原始媒体持久缓存、并发下载合并、重连刷新与离线回退。
+- 改进时间线媒体展示，增加上传进度，上传期间防止重复上传与发布。
+- 保留 Android Keystore、加密聊天缓存、FCM/ntfy、文件导出与原生屏幕适配；新增媒体缓存回归测试并更新全部维护说明。
+- 包版本、Android 版本及个人信息页底部统一为 `2.6.6`（`versionCode 26006`），签名正式 APK/AAB 启用 R8，仅包含 arm64-v8a 原生库。
+
+---
+
 ## 2.6.5
 
 - Added friend requests and mutual removal from user profiles. Refresh friends on WebSocket authentication and friendship changes, and refresh pending requests when the relationship changes.

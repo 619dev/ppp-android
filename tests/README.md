@@ -5,6 +5,7 @@ Run from this repository root after `npm ci`:
 ```bash
 npm run test:security
 npm run test:attachments
+npm run test:media-cache
 npm run test:i18n
 npm run build
 ```
@@ -37,6 +38,10 @@ isolation. The sync suite covers more than 100 pages, ciphertext persistence
 before cursor advancement, storage/network failures and account changes.
 
 The attachment suite checks authenticated downloads, access-token refresh, external URL rejection, legacy R2 URL mapping, relative avatar normalization and same-origin fallback.
+
+## Persistent media cache
+
+`npm run test:media-cache` checks original-byte persistence, concurrent download deduplication, reconnect revalidation, offline fallback, account isolation and unavailable-storage fallback. Native WebView and two-device UI acceptance remain manual. Reopen avatars, Moments, Timeline and chat attachments while inspecting network requests; reload/reconnect to verify refresh and disconnect to verify cached reads. Check Timeline scroll restoration after returning from several posts. Upload images and video, verify filename/percentage feedback and disabled publish/select controls, and exercise upload failures. Persistence requires WebView Cache Storage support.
 
 ## Protocol and trust model
 
@@ -133,6 +138,6 @@ Use two compatible native clients to verify password setup/unlock, both directio
 
 With a server containing upstream fixes `d3e95fe` and `0d65d79`, verify that startup repairs a one-sided accepted friendship. On two Android clients, send and accept an invitation, remove the friendship from a user profile, and check that both contact lists and pending requests refresh. Repeat with one client offline and check the refreshed friend list after reconnecting.
 
-The application and profile footer version is `2.6.5` (`versionCode 26005`). A source update does not indicate a published release. Tests of this shared source do not validate published native clients or Docker images. Local caches retain at most 2,000 messages per conversation; server-side auto-delete and attachment retention remain applicable. Message signing does not end-to-end encrypt uploaded file bytes, and no upgrade can recreate previously lost keys.
+The application and profile footer version is `2.6.6` (`versionCode 26006`). A source update does not indicate a published release. Tests of this shared source do not validate published native clients or Docker images. Local caches retain at most 2,000 messages per conversation; server-side auto-delete and attachment retention remain applicable. Message signing does not end-to-end encrypt uploaded file bytes, and no upgrade can recreate previously lost keys.
 
 See the [main README](../README_EN.md) and [中文说明](../README.md). These client suites use real cryptography with mocked transport and persistence. They provide regression coverage; native-device UI testing remains separate.
