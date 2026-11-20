@@ -4,6 +4,18 @@ All notable changes and new features are recorded here. Historical entries below
 
 所有重要版本改动和新特性统一记录于此。下方历史条目由仓库原有文档迁移而来。
 
+## 2.6.7 — 2026-11-20
+
+- Synced shared frontend `43cca72`. Profile now offers password-confirmed account deletion and automatic deletion after 3 months, 6 months, 1 year, 2 years or 3 years of inactivity. The default is 1 year. Successful sign-in restarts the countdown.
+- Added authenticator-code password recovery for accounts with two-factor authentication enabled. A successful reset revokes existing sessions. Both flows support eight languages and require the upstream 2.6.7 server.
+- Updated Android, package metadata and the profile footer to `2.6.7` (`versionCode 26007`). Android keeps native secure storage and the login screen’s WebView scrolling behavior.
+
+- 同步公共前端 `43cca72`。个人信息支持密码确认后立即删除账号，也可设置连续 3 个月、6 个月、1 年、2 年或 3 年未登录后自动删除。默认 1 年，成功登录后重新计时。
+- 已启用双因素验证的账号可使用验证器验证码找回密码，修改成功后撤销已有会话。两项功能支持八种语言，需要部署上游 2.6.7 服务端。
+- Android、包元数据和个人信息页底部版本统一为 `2.6.7`（`versionCode 26007`），保留 Android 原生安全存储及登录页 WebView 滚动适配。
+
+---
+
 ## 2.6.6
 
 - Synced shared frontend `79746d7`: persistent account-isolated media cache, download deduplication, reconnect refresh and offline fallback for original media bytes.
