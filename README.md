@@ -8,7 +8,7 @@
 [![React](https://img.shields.io/badge/React-19-blue)](#)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](#)
 [![Capacitor](https://img.shields.io/badge/Capacitor-8-green)](#)
-[![Version](https://img.shields.io/badge/版本-2.6.7-orange)](package.json)
+[![Version](https://img.shields.io/badge/版本-2.6.8-orange)](package.json)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](LICENSE)
 
 [![Google Play](https://img.shields.io/badge/Google%20Play-下载-green?logo=google-play)](https://play.google.com/store/apps/details?id=com.fm619.paperphoneplus)
@@ -43,11 +43,11 @@ PaperPhonePlus 是一款微信风格的端对端加密即时通讯应用。本�
 
 完整版本更新记录已迁移至 [changelog.md](changelog.md)。
 
-2.6.7 同步公共前端 `43cca72`。个人信息新增「账号删除」页面，可以设置连续未登录多久后自动删除账号（默认 1 年），也可以输入密码立即删除。已启用双因素验证的用户可在登录页使用验证器验证码重设密码，成功后会退出已有设备会话。两项功能支持八种语言。
+2.6.8 同步公共前端 `9cc5486`，将身份验证、群消息状态、通话、扫码和设置中的界面图标统一为 Lucide。表情面板更新分类图标，保留 Emoji 输入、最近使用记录和贴纸。
 
-### 2.6.7 升级与验证
+### 2.6.8 升级与验证
 
-请先部署上游 2.6.7 服务端，请在升级前备份 MySQL。服务启动时会迁移 MySQL，并根据已有活动记录补齐未登录计时。首次清理在启动时执行，此后每小时检查一次。使用升级后的服务端验证删除设置、密码找回以及会话撤销。保留对好友修复 `d3e95fe` 和 `0d65d79` 的依赖。
+账号删除和密码找回需要上游 2.6.7 或更高版本的服务端，请在升级前备份 MySQL。服务启动时会迁移 MySQL，并根据已有活动记录补齐未登录计时。首次清理在启动时执行，此后每小时检查一次。使用升级后的服务端验证删除设置、密码找回以及会话撤销。在 Android 上核对个人信息页版本、身份验证对勾、群消息签名状态及表情面板。保留对好友修复 `d3e95fe` 和 `0d65d79` 的依赖。
 
 ```bash
 npm run test:security
@@ -61,7 +61,7 @@ npm run build
 
 ## 🔐 额外加密文本外观：工作原理与安全边界
 
-这项功能是**建立在原有端到端加密（E2EE）之上的额外保险**，不是用文本外观代替 E2EE，也不会绕过或降低原有加密。2.6.7 私聊签名消息使用 X25519 密钥协商、XSalsa20-Poly1305 加密及 Ed25519 签名；群聊使用 Sender Key 加密及 Ed25519 签名。身份私钥和群聊 Sender Key 继续由 Android Keystore 保护。
+这项功能是**建立在原有端到端加密（E2EE）之上的额外保险**，不是用文本外观代替 E2EE，也不会绕过或降低原有加密。2.6.8 私聊签名消息使用 X25519 密钥协商、XSalsa20-Poly1305 加密及 Ed25519 签名；群聊使用 Sender Key 加密及 Ed25519 签名。身份私钥和群聊 Sender Key 继续由 Android Keystore 保护。
 
 启用后，发送的私聊消息按以下顺序处理。新群消息直接使用 Sender Key 加密和 Ed25519 签名。旧群消息如使用了文本外观加密，仍可用原密码读取。
 
@@ -113,7 +113,7 @@ ppp-android/
 - **状态管理**：Zustand 5
 - **原生桥接**：Capacitor 8（Android）
 - **加密库**：libsodium-wrappers-sumo（WebAssembly，Curve25519 / XSalsa20-Poly1305）
-- **兼容加密依赖**：保留 crystals-kyber-js；2.6.7 签名消息路径使用 X25519，当前注册接口的 `kem_pub` 实际承载 Ed25519 签名公钥，不代表已启用抗量子密钥注册。
+- **兼容加密依赖**：保留 crystals-kyber-js；2.6.8 签名消息路径使用 X25519，当前注册接口的 `kem_pub` 实际承载 Ed25519 签名公钥，不代表已启用抗量子密钥注册。
 - **视频通话**：LiveKit SFU（私聊与群组会议）
 - **推送通知**：Firebase Cloud Messaging (FCM)
 - **UI 图标**：Lucide React
@@ -208,7 +208,7 @@ cd android
 
 发布签名使用 `paperphone-release.keystore`，密码由 `KEYSTORE_PASSWORD` 和 `KEY_PASSWORD` 环境变量提供；请在本机安全设置，勿将凭据提交到仓库。生成正式发布包前必须提供与现有密钥库匹配的正确凭据，勿依赖回退密码。
 
-应用版本为 `2.6.7`，Google Play `versionCode` 为 `26007`；个人信息页面底部显示 `PaperPhonePlus v2.6.7`。正式构建启用 R8，原生库仅允许 `arm64-v8a`。AAB 位于 `android/app/build/outputs/bundle/release/app-release.aab`，APK 位于 `android/app/build/outputs/apk/release/app-release.apk`。Google Play 使用 AAB，GitHub Releases 提供签名 APK。
+应用版本为 `2.6.8`，Google Play `versionCode` 为 `26008`；个人信息页面底部显示 `PaperPhonePlus v2.6.8`。正式构建启用 R8，原生库仅允许 `arm64-v8a`。AAB 位于 `android/app/build/outputs/bundle/release/app-release.aab`，APK 位于 `android/app/build/outputs/apk/release/app-release.apk`。Google Play 使用 AAB，GitHub Releases 提供签名 APK。
 
 ---
 
